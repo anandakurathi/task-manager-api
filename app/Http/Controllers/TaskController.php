@@ -22,14 +22,8 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $version = $request->attributes->get('api_version');
-        dd($version);
-        if($version === 'v1') {
-            $tasks = $this->taskRepository->paginate();
-        } else {
-            $tasks = $this->taskRepository->all();
-        }
-
-
+        $tasks = $this->taskRepository->all();
+        
         return response()->json([
             'message' => 'List of all tasks',
             'tasks' => $tasks

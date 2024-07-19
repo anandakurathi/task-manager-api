@@ -13,5 +13,5 @@ Route::middleware(['auth:sanctum', 'api.version:v1'])->group( function () {
 });
 
 Route::middleware(['auth:sanctum', 'api.version:v2'])->group( function () {
-    Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('v2/task', TaskController::class);
 });
