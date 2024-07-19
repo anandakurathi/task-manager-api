@@ -26,9 +26,11 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
+        // email:rfc,dns rule make sure user providing valid email
+        // for now not going with regex for strong validation rules.
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'email' => ['required', 'string', 'email:rfc,dns'],
+            'password' => ['required', 'string', 'alpha_num', 'min:6', 'max:16'],
         ];
     }
 

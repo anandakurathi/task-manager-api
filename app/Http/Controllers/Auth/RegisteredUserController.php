@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): Response
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -31,11 +32,16 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
         ]);
+// we are not verifining the user now so we don't need this event
+//        event(new Registered($user));
+// As it is REST we don't need session to be initiated
+//        Auth::login($user);
+        // Creating a token without scopes...
+        $token = $user->createToken($request->email);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return response()->noContent();
+        return response()->json([
+            'message' => 'Successfully created user!',
+            'token' => $token->plainTextToken,
+        ]);
     }
 }
