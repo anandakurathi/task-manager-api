@@ -24,3 +24,21 @@ Add middleware for versioning
 
 ### step 5
 Add test cases
+
+
+### how to run 
+```
+cd task-manage-api
+composer install
+./vendor/bin/sail up -d
+
+on browser 
+http://localhost:80/
+
+telescope for request profile
+http://localhost/telescope
+```
+
+### use of API
+
+Import the postman environment & collection for testing.
