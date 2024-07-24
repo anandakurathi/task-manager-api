@@ -42,6 +42,6 @@ class RegisteredUserController extends Controller
         return response()->json([
             'message' => 'Successfully created user!',
             'token' => $token->plainTextToken,
-        ]);
+        ],201);
     }
 }

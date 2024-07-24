@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         return response()->json([
             'message' => 'Successfully logged in!',
             'token' => $token->plainTextToken,
-        ]);
+        ], 201);
     }
 
     /**
@@ -46,6 +46,6 @@ class AuthenticatedSessionController extends Controller
 
         return response()->json([
             'message' => 'Successfully logged out!'
-        ]);
+        ],200);
     }
 }
